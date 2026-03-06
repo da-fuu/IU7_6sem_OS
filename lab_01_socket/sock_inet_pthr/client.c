@@ -49,18 +49,18 @@ int main(int argc, char **argv) {
         perror("usage: client <IPaddress>");
         exit(1);
     }
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
-        perror("socket");
-        exit(1);
-    }
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(SERV_PORT);
-    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) == -1) {
-        perror("inet_pton");
-        exit(1);
-    }
     for (int i = 0; i < 500; i++) {
+        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        if (sockfd == -1) {
+            perror("socket");
+            exit(1);
+        }
+        servaddr.sin_family = AF_INET;
+        servaddr.sin_port = htons(SERV_PORT);
+        if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) == -1) {
+            perror("inet_pton");
+            exit(1);
+        }
         if (connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) == -1) {
             perror("connect");
             exit(1);
@@ -70,9 +70,8 @@ int main(int argc, char **argv) {
             produce(sockfd);
         else
             consume(sockfd);
-        usleep(rand() % 5000);
+        close(sockfd);
+        //usleep(rand() % 5000);
     }
-    close(sockfd);
-
     exit(0);
 }

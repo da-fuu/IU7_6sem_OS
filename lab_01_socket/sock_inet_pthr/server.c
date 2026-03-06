@@ -10,6 +10,16 @@
 #include <time.h>
 #include <errno.h>
 
+struct client_args {
+    int connfd;
+    int semfd;
+    char *letter;
+    char *buffer;
+    int *prod_ind;
+    int *cons_ind;
+    FILE *logfile;
+};
+
 #define SERV_PORT 9878
 #define BUF_LEN 50
 #define SB 0
@@ -21,15 +31,6 @@ struct sembuf start_produce[2] = { {SE, P, 0}, {SB, P, 0} };
 struct sembuf stop_produce[2] =  { {SB, V, 0}, {SF, V, 0} };
 struct sembuf start_consume[2] = { {SF, P, 0}, {SB, P, 0} };
 struct sembuf stop_consume[2] =  { {SB, V, 0}, {SE, V, 0} };
-struct client_args {
-    int connfd;
-    int semfd;
-    char *letter;
-    char *buffer;
-    int *prod_ind;
-    int *cons_ind;
-    FILE *logfile;
-};
 bool fl = 1;
 
 void producer(int connfd, char *buffer, char *letter, int *prod_ind, int semfd) {
@@ -184,6 +185,7 @@ int main(void) {
         clilen = sizeof(cliaddr);
         connfd = accept(listenfd, (struct sockaddr *)&cliaddr, &clilen);
         if (connfd == -1) {
+            printf("errno %d\n", errno);
             if (errno != EINTR) {
                 perror("accept");
                 exit(1);
