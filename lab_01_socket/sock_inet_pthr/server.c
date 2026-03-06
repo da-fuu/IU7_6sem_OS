@@ -19,7 +19,6 @@ struct client_args {
     int *cons_ind;
     FILE *logfile;
 };
-
 #define SERV_PORT 9878
 #define BUF_LEN 50
 #define SB 0
@@ -133,16 +132,18 @@ int main(void) {
     int cons_ind = 0;
     FILE *logfile;
 
-    logfile = fopen("server.log", "w");
+    logfile = fopen("pthread_server.log", "w");
     if (logfile == NULL) {
         perror("fopen");
         exit(1);
     }
-    if ((semkey = ftok("./key.txt", 1)) == -1) {
+    semkey = ftok("./key.txt", 1);
+    if (semkey == -1) {
         perror("ftok");
         exit(1);
     }
-    if ((semfd = semget(semkey, 3, IPC_CREAT | perms)) == -1) {
+    semfd = semget(semkey, 3, IPC_CREAT | perms);
+    if (semfd == -1) {
         perror("semget");
         exit(1);
     }
