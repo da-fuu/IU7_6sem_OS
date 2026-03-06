@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <pthread.h>
+#include <time.h>
 
 #define SERV_PORT 9878
 #define BUF_LEN 50
@@ -15,7 +16,6 @@
 #define SF 2
 #define P -1
 #define V  1
-
 struct sembuf start_produce[2] = { {SE, P, 0}, {SB, P, 0} };
 struct sembuf stop_produce[2] =  { {SB, V, 0}, {SF, V, 0} };
 struct sembuf start_consume[2] = { {SF, P, 0}, {SB, P, 0} };
@@ -26,6 +26,7 @@ char *prod_ptr;
 char *cons_ptr;
 int listenfd;
 int semfd;
+FILE *logfile;
 
 void producer(int connfd) {
     char buf[1];
@@ -80,8 +81,10 @@ void consumer(int connfd) {
 void* process_client(void *args) {
     int connfd = *(int *)&args;
     char buf[10];
+    struct timespec start, end;
 
     printf("Connected\n");
+    clock_gettime(CLOCK_REALTIME, &start);
     if (recv(connfd, buf, sizeof(buf), 0) == -1) {
         perror("recv");
         exit(1);
@@ -93,6 +96,8 @@ void* process_client(void *args) {
     else
         printf("Unknown request: %c\n", buf[0]);
     close(connfd);
+    clock_gettime(CLOCK_REALTIME, &end);
+    fprintf(logfile, "%ld\n", end.tv_nsec - start.tv_nsec);
     return NULL;
 }
 
@@ -102,6 +107,7 @@ void sigint_handler(int signum) {
         perror("semctl");
         exit(1);
     }
+    fclose(logfile);
     exit(0);
 }
 
@@ -113,6 +119,11 @@ int main(void) {
     struct sockaddr_in cliaddr, servaddr = { 0 };
     pthread_t th;
 
+    logfile = fopen("server.log", "w");
+    if (logfile == NULL) {
+        perror("fopen");
+        exit(1);
+    }
     if ((semkey = ftok("./key.txt", 1)) == -1) {
         perror("ftok");
         exit(1);
