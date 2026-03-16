@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
             exit(1);
         }
         printf("Connected\n");
-        if (i % 2 == 0)
+        if (rand() % 2 == 0)
             produce(sockfd);
         else
             consume(sockfd);

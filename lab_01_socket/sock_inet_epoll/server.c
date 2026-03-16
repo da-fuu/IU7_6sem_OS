@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <sys/socket.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -7,21 +8,22 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <time.h>
+#include <errno.h>
 #include <sys/epoll.h>
 #include <fcntl.h>
 
 #define MAX_EVENTS 10
 #define SERV_PORT 9878
 #define BUF_LEN 50
-#define SB 0
-#define SE 1
-#define SF 2
+#define SE 0
+#define SF 1
 #define P -1
 #define V  1
-struct sembuf start_produce[2] = { {SE, P, 0}, {SB, P, 0} };
-struct sembuf stop_produce[2] =  { {SB, V, 0}, {SF, V, 0} };
-struct sembuf start_consume[2] = { {SF, P, 0}, {SB, P, 0} };
-struct sembuf stop_consume[2] =  { {SB, V, 0}, {SE, V, 0} };
+struct sembuf start_produce[1] = { {SE, P, 0} };
+struct sembuf stop_produce[1] =  { {SF, V, 0} };
+struct sembuf start_consume[1] = { {SF, P, 0} };
+struct sembuf stop_consume[1] =  { {SE, V, 0} };
+struct timespec timeout = {.tv_sec = 0, .tv_nsec = 500000};
 bool fl = 1;
 
 void setnonblocking(int sockfd)
@@ -40,7 +42,16 @@ void setnonblocking(int sockfd)
 
 void producer(int connfd, char *buffer, char *letter, int *prod_ind, int semfd) {
     char buf[1];
-    if (semop(semfd, start_produce, 2) == -1) {
+    if (semtimedop(semfd, start_produce, 1, &timeout) == -1) {
+        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            buf[0] = '!';
+            printf("send error\n");
+            if (send(connfd, &buf, sizeof(buf), 0) == -1) {
+                perror("send");
+                exit(1);
+            }
+            return;
+        }
         perror("semop");
         exit(1);
     }
@@ -54,7 +65,7 @@ void producer(int connfd, char *buffer, char *letter, int *prod_ind, int semfd) 
         *prod_ind = 0;
     else
         (*prod_ind)++;
-    if (semop(semfd, stop_produce, 2) == -1) {
+    if (semop(semfd, stop_produce, 1) == -1) {
         perror("semop");
         exit(1);
     }
@@ -68,7 +79,16 @@ void producer(int connfd, char *buffer, char *letter, int *prod_ind, int semfd) 
 
 void consumer(int connfd, char *buffer, char *letter, int *cons_ind, int semfd) {
     char buf[1];
-    if (semop(semfd, start_consume, 2) == -1) {
+    if (semtimedop(semfd, start_consume, 1, &timeout) == -1) {
+        if (errno == EAGAIN) {
+            buf[0] = '!';
+            printf("send error\n");
+            if (send(connfd, &buf, sizeof(buf), 0) == -1) {
+                perror("send");
+                exit(1);
+            }
+            return;
+        }
         perror("semop");
         exit(1);
     }
@@ -77,7 +97,7 @@ void consumer(int connfd, char *buffer, char *letter, int *cons_ind, int semfd) 
         *cons_ind = 0;
     else
         (*cons_ind)++;
-    if (semop(semfd, stop_consume, 2) == -1) {
+    if (semop(semfd, stop_consume, 1) == -1) {
         perror("semop");
         exit(1);
     }
@@ -138,13 +158,9 @@ int main(void) {
         perror("ftok");
         exit(1);
     }
-    semfd = semget(semkey, 3, IPC_CREAT | perms);
+    semfd = semget(semkey, 2, IPC_CREAT | perms);
     if (semfd == -1) {
         perror("semget");
-        exit(1);
-    }
-    if (semctl(semfd, SB, SETVAL, 1) == -1) {
-        perror("semctl");
         exit(1);
     }
     if (semctl(semfd, SE, SETVAL, BUF_LEN) == -1) {
@@ -171,7 +187,7 @@ int main(void) {
         perror("bind");
         exit(1);
     }
-    if (listen(listenfd, 1024) == -1) {
+    if (listen(listenfd, 10) == -1) {
         perror("listen");
         exit(1);
     }
