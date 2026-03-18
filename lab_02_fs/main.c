@@ -65,7 +65,7 @@ char *path_alloc(size_t *sizep) {
 int main(int argc, char *argv[]) {
     int ret;
     if (argc != 2) {
-        printf("Использование: ftw <начальный_каталог>");
+        printf("Использование: ftw <начальный_каталог>\n");
         exit(1);
     }
     ret = myftw(argv[1], myfunc); /* выполняет всю работу */
@@ -150,13 +150,13 @@ int myfunc(const char *pathname, const struct stat *statptr, int type) {
         ndir++;
         break;
     case FTW_DNR:
-        printf("закрыт доступ к каталогу %s", pathname);
+        printf("закрыт доступ к каталогу %s\n", pathname);
         break;
     case FTW_NS:
-        printf("ошибка вызова функции stat для %s", pathname);
+        printf("ошибка вызова функции stat для %s\n", pathname);
         break;
     default:
-        printf("неизвестный тип %d для файла %s", type, pathname);
+        printf("неизвестный тип %d для файла %s\n", type, pathname);
     }
     return(0);
 }
