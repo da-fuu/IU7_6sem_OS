@@ -99,8 +99,7 @@ int dopath(Myfunc* func) {
     struct stat statbuf;
     struct dirent *dirp;
     DIR *dp;
-    int ret, n;
-    bool fl = 1;
+    int n, ret = 0;
 
     if (lstat(fullpath, &statbuf) == -1)
         return(func(fullpath, &statbuf, FTW_NS));
@@ -122,11 +121,10 @@ int dopath(Myfunc* func) {
         perror("chdir");
         exit(1);
     }
-    while ((dirp = readdir(dp)) != NULL && fl) {
+    while (ret == 0 && (dirp = readdir(dp)) != NULL) {
         if (strcmp(dirp->d_name, ".") != 0 && strcmp(dirp->d_name, "..") != 0) {
-            strcpy(fullpath, dirp->d_name); /* добавить имя после слеша */
-            if ((ret = dopath(func)) != 0)
-                fl = 0; /* выход по ошибке */
+            strcpy(fullpath, dirp->d_name);
+            ret = dopath(func);
         }
     }
     if (chdir("..") == -1) {
