@@ -11,7 +11,7 @@ typedef int Myfunc(const char *, const struct stat *, int);
 Myfunc myfunc;
 int myftw(char *, Myfunc *);
 int dopath(Myfunc *);
-long nreg, ndir, nblk, nchr, nfifo, nslink, nsock, ntot;
+int level = 0;
 
 #define FTW_F 1   /* файл, не являющийся каталогом */
 #define FTW_D 2   /* каталог */
@@ -69,16 +69,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     ret = myftw(argv[1], myfunc); /* выполняет всю работу */
-    ntot = nreg + ndir + nblk + nchr + nfifo + nslink + nsock;
-    if (ntot == 0)
-        ntot = 1;/* во избежание деления на 0 вывести 0 для всех счетчиков */
-    printf("обычные файлы =                          %7ld, %5.2f %%\n", nreg, nreg*100.0/ntot);
-    printf("каталоги =                               %7ld, %5.2f %%\n", ndir, ndir*100.0/ntot);
-    printf("специальные файлы блочных устройств =    %7ld, %5.2f %%\n", nblk, nblk*100.0/ntot);
-    printf("специальные файлы символьных устройств = %7ld, %5.2f %%\n", nchr, nchr*100.0/ntot);
-    printf("FIFO =                                   %7ld, %5.2f %%\n", nfifo, nfifo*100.0/ntot);
-    printf("символические ссылки =                   %7ld, %5.2f %%\n", nslink, nslink*100.0/ntot);
-    printf("сокеты =                                 %7ld, %5.2f %%\n", nsock, nsock*100.0/ntot);
     exit(ret);
 }
 
@@ -135,17 +125,30 @@ int myfunc(const char *pathname, const struct stat *statptr, int type) {
     switch (type) {
     case FTW_F:
         switch (statptr->st_mode & S_IFMT) {
-        case S_IFREG:   nreg++;     break;
-        case S_IFBLK:   nblk++;     break;
-        case S_IFCHR:   nchr++;     break;
-        case S_IFIFO:   nfifo++;    break;
-        case S_IFLNK:   nslink++;   break;
-        case S_IFSOCK:  nsock++;    break;
+        case S_IFREG:
+            printf("-");
+            break;
+        case S_IFBLK:
+            printf("b");
+            break;
+        case S_IFCHR:
+            printf("c");
+            break;
+        case S_IFIFO:
+            printf("p");
+            break;
+        case S_IFLNK:
+            printf("l");
+            break;
+        case S_IFSOCK:
+            printf("s");
+            break;
         case S_IFDIR:   printf("признак S_IFDIR для %s", pathname);
         }
+        printf(" %*s%s\n", level, "", pathname);
         break;
     case FTW_D:
-        ndir++;
+        printf("d %*s%s/\n", level, "", pathname);
         break;
     case FTW_DNR:
         printf("закрыт доступ к каталогу %s\n", pathname);
