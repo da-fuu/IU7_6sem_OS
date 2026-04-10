@@ -1,0 +1,165 @@
+
+[Process Environment Variables]
+SHELL=/bin/bash
+SESSION_MANAGER=local/deblap:@/tmp/.ICE-unix/1537,unix/deblap:/tmp/.ICE-unix/1537
+WINDOWID=94280884871760
+QT_ACCESSIBILITY=1
+COLORTERM=truecolor
+XDG_CONFIG_DIRS=/home/dafuu/.config/kdedefaults:/etc/xdg:/usr/share/desktop-base/kf5-settings
+XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session1
+XDG_MENU_PREFIX=plasma-
+ICEAUTHORITY=/run/user/1000/iceauth_xJrGev
+LANGUAGE=en_US:en
+SSH_AUTH_SOCK=/run/user/1000/gcr/ssh
+SHELL_SESSION_ID=f379254397e44850bcaebb124099978b
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+DESKTOP_SESSION=plasma
+GTK_RC_FILES=/etc/gtk/gtkrc:/home/dafuu/.gtkrc:/home/dafuu/.config/gtkrc
+XDG_SEAT=seat0
+PWD=/home/dafuu/IU7_6sem_OS/lab_03_proc/dirtree
+XDG_SESSION_DESKTOP=KDE
+LOGNAME=dafuu
+XDG_SESSION_TYPE=wayland
+GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1
+SYSTEMD_EXEC_PID=1613
+XAUTHORITY=/run/user/1000/xauth_xfIKXs
+XKB_DEFAULT_MODEL=pc105
+GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/dafuu/.gtkrc-2.0:/home/dafuu/.config/gtkrc-2.0
+HOME=/home/dafuu
+LC_PAPER=C
+LANG=en_US.UTF-8
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.jxl=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+_JAVA_AWT_WM_NONREPARENTING=1
+XDG_CURRENT_DESKTOP=KDE
+KONSOLE_DBUS_SERVICE=:1.114
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/plasma-plasmashell.service/memory.pressure
+WAYLAND_DISPLAY=wayland-0
+KONSOLE_DBUS_SESSION=/Sessions/5
+PROFILEHOME=
+XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+INVOCATION_ID=51c29a30f8c742dfa780a8e6552b1c21
+KONSOLE_VERSION=251201
+MANAGERPID=1275
+KDE_SESSION_UID=1000
+XKB_DEFAULT_LAYOUT=us
+XDG_SESSION_CLASS=user
+TERM=xterm-256color
+KONSOLE_DBUS_ACTIVATION_COOKIE=IqNQuNrLPJt/WEkjwzpQh+Rr4+Uqe6QFwnqYCyWqRhQ=
+USER=dafuu
+COLORFGBG=15;0
+QT_WAYLAND_RECONNECT=1
+KDE_SESSION_VERSION=6
+PAM_KWALLET5_LOGIN=/run/user/1000/kwallet5.socket
+DISPLAY=:1
+SHLVL=1
+LC_MEASUREMENT=C
+XDG_VTNR=1
+XDG_SESSION_ID=3
+MANAGERPIDFDID=1276
+XDG_RUNTIME_DIR=/run/user/1000
+LC_TIME=ru_RU.UTF-8
+JOURNAL_STREAM=9:17114
+GCC_COLORS=error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01
+KDE_FULL_SESSION=true
+PATH=/home/dafuu/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+KDE_APPLICATIONS_AS_SCOPE=1
+KONSOLE_DBUS_WINDOW=/Windows/1
+_=./chdir
+OLDPWD=/home/dafuu/IU7_6sem_OS/lab_03_proc
+
+[Process Stat]
+1. PID: 8116
+2. Command: (chdir)
+3. State: S
+4. PPID: 4489
+5. PGRP: 8116
+6. Session: 4489
+7. TTY_NR: 34822
+8. Tpgid: 8116
+9. Flags: 4194304
+10. Minflt: 209
+11. Cminflt: 0
+12. Majflt: 0
+13. Cmajflt: 0
+14. Utime: 23
+15. Stime: 102
+16. Cutime: 0
+17. Cstime: 0
+18. Priority: 20
+19. Nice: 0
+20. Num Threads: 1
+21. Starttime: 545421
+22. Vsize: 3338240
+23. Rss: 436
+24. Rsslim: 9223372036854775807
+25. Startcode: 94332726964224 (55cb8cae7000)
+26. Endcode: 94332726966613 (55cb8cae7955)
+27. Startstack: 140733544343776 (7fff14eb28e0)
+28. Kstkesp: 0
+29. Kstkeip: 0
+30. Signal: 0
+31. Blocked: 0
+32. Sigignore: 0
+33. Sigcatch: 0
+34. Wchan: 1
+35. Nswap: 0
+36. Cnswap: 0
+37. Exit_signal: 17
+38. Processor: 2
+39. Rt_priority: 0
+40. Policy: 0
+41. Delayacct_blkio_ticks: 0
+42. Guest_time: 0
+43. Cguest_time: 0
+44. Start_data: 94332726975952 (55cb8cae9dd0)
+45. End_data: 94332726976680 (55cb8caea0a8)
+46. Start_brk: 94333578969088 (55cbbf770000)
+47. Arg_start: 140733544345504 (7fff14eb2fa0)
+48. Arg_end: 140733544345514 (7fff14eb2faa)
+49. Env_start: 140733544345514 (7fff14eb2faa)
+50. Env_end: 140733544349680 (7fff14eb3ff0)
+51. Exit_code: 0
+
+[Command Line Arguments]
+./chdir
+/
+
+[File Descriptors]:
+.
+..
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+
+[Current Working Directory]: /home/dafuu/tg/unpacked_app/smali_classes4/org/telegram/tgnet
+
+[Executable Path]: /home/dafuu/IU7_6sem_OS/lab_03_proc/dirtree/chdir
+
+[Root Directory]: /
+
+[I/O Statistics]
+rchar: 4148
+wchar: 15911724
+syscr: 9
+syscw: 163224
+read_bytes: 64999424
+write_bytes: 0
+cancelled_write_bytes: 0
+
+[Process Name]
+chdir
+
+[Task Subdirectory]:
+.
+..
+8116

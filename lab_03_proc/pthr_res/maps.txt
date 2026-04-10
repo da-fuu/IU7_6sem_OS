@@ -1,0 +1,35 @@
+
+[Memory Map]
+    1  5622af3ac000-5622af3ad000 r--p 00000000 103:06 5771750                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_pthr/server
+    1  5622af3ad000-5622af3ae000 r-xp 00001000 103:06 5771750                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_pthr/server
+    1  5622af3ae000-5622af3af000 r--p 00002000 103:06 5771750                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_pthr/server
+    1  5622af3af000-5622af3b0000 r--p 00002000 103:06 5771750                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_pthr/server
+    1  5622af3b0000-5622af3b1000 rw-p 00003000 103:06 5771750                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_pthr/server
+   33  5622c7561000-5622c7582000 rw-p 00000000 00:00 0                          [heap]
+ 2049  7fa4db7ef000-7fa4dbff0000 rw-p 00000000 00:00 0 
+26637  7fa4dc7f1000-7fa4e2ffe000 rw-p 00000000 00:00 0 
+ 4098  7fa4e2ffe000-7fa4e4000000 rw-p 00000000 00:00 0 
+   33  7fa4e4000000-7fa4e4021000 rw-p 00000000 00:00 0 
+16351  7fa4e4021000-7fa4e8000000 ---p 00000000 00:00 0 
+ 4098  7fa4e85c2000-7fa4e95c4000 rw-p 00000000 00:00 0 
+    3  7fa4e95c4000-7fa4e95c7000 rw-p 00000000 00:00 0 
+   40  7fa4e95c7000-7fa4e95ef000 r--p 00000000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+  362  7fa4e95ef000-7fa4e9759000 r-xp 00028000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+   83  7fa4e9759000-7fa4e97ac000 r--p 00192000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+    4  7fa4e97ac000-7fa4e97b0000 r--p 001e5000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+    2  7fa4e97b0000-7fa4e97b2000 rw-p 001e9000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+   13  7fa4e97b2000-7fa4e97bf000 rw-p 00000000 00:00 0 
+    2  7fa4e97df000-7fa4e97e1000 rw-p 00000000 00:00 0 
+    4  7fa4e97e1000-7fa4e97e5000 r--p 00000000 00:00 0                          [vvar]
+    2  7fa4e97e5000-7fa4e97e7000 r--p 00000000 00:00 0                          [vvar_vclock]
+    2  7fa4e97e7000-7fa4e97e9000 r-xp 00000000 00:00 0                          [vdso]
+    1  7fa4e97e9000-7fa4e97ea000 r--p 00000000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   41  7fa4e97ea000-7fa4e9813000 r-xp 00001000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   11  7fa4e9813000-7fa4e981e000 r--p 0002a000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    2  7fa4e981e000-7fa4e9820000 r--p 00035000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    1  7fa4e9820000-7fa4e9821000 rw-p 00037000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    1  7fa4e9821000-7fa4e9822000 rw-p 00000000 00:00 0 
+   34  7ffec0eb7000-7ffec0ed9000 rw-p 00000000 00:00 0                          [stack]
+Total pages: 53912
+Total vsize: 220823552 bytes
+address space: 41.86 TB

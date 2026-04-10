@@ -1,0 +1,29 @@
+
+[Memory Map]
+    1  55f8fcb93000-55f8fcb94000 r--p 00000000 103:06 5805187                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_epoll/server
+    1  55f8fcb94000-55f8fcb95000 r-xp 00001000 103:06 5805187                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_epoll/server
+    1  55f8fcb95000-55f8fcb96000 r--p 00002000 103:06 5805187                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_epoll/server
+    1  55f8fcb96000-55f8fcb97000 r--p 00002000 103:06 5805187                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_epoll/server
+    1  55f8fcb97000-55f8fcb98000 rw-p 00003000 103:06 5805187                   /home/dafuu/IU7_6sem_OS/lab_03_proc/sock_inet_epoll/server
+   33  55f93a874000-55f93a895000 rw-p 00000000 00:00 0                          [heap]
+    3  7ff389c4e000-7ff389c51000 rw-p 00000000 00:00 0 
+   40  7ff389c51000-7ff389c79000 r--p 00000000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+  362  7ff389c79000-7ff389de3000 r-xp 00028000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+   83  7ff389de3000-7ff389e36000 r--p 00192000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+    4  7ff389e36000-7ff389e3a000 r--p 001e5000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+    2  7ff389e3a000-7ff389e3c000 rw-p 001e9000 103:06 7085976                   /usr/lib/x86_64-linux-gnu/libc.so.6
+   13  7ff389e3c000-7ff389e49000 rw-p 00000000 00:00 0 
+    2  7ff389e69000-7ff389e6b000 rw-p 00000000 00:00 0 
+    4  7ff389e6b000-7ff389e6f000 r--p 00000000 00:00 0                          [vvar]
+    2  7ff389e6f000-7ff389e71000 r--p 00000000 00:00 0                          [vvar_vclock]
+    2  7ff389e71000-7ff389e73000 r-xp 00000000 00:00 0                          [vdso]
+    1  7ff389e73000-7ff389e74000 r--p 00000000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   41  7ff389e74000-7ff389e9d000 r-xp 00001000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+   11  7ff389e9d000-7ff389ea8000 r--p 0002a000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    2  7ff389ea8000-7ff389eaa000 r--p 00035000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    1  7ff389eaa000-7ff389eab000 rw-p 00037000 103:06 7085966                   /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+    1  7ff389eab000-7ff389eac000 rw-p 00000000 00:00 0 
+   34  7ffc3f395000-7ffc3f3b7000 rw-p 00000000 00:00 0                          [stack]
+Total pages: 646
+Total vsize: 2646016 bytes
+address space: 42.01 TB
