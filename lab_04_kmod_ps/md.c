@@ -1,9 +1,6 @@
-#include <linux/init.h>
-#include <linux/init_task.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/sched.h>
-#include <linux/string.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Zharinov");
