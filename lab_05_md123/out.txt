@@ -1,0 +1,189 @@
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo insmod md1.ko
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo insmod md2.ko
+dafuu)~/IU7_6sem_OS/lab_05_md123-> lsmod | grep md | head -n 2
+md2                    12288  0
+md1                    12288  1 md2
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo dmesg | tail -15
+[ 3923.126776] + module md1 start!
+[ 3926.618324] + module md2 start!
+[ 3926.618330] + data string exported from md1 : Привет мир!
+[ 3926.618334] + string returned md1_proc() is : Привет мир!
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo rmmod md2.ko
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+make -C /lib/modules/6.19.13+deb14-amd64/build M=/home/dafuu/IU7_6sem_OS/lab_05_md123 modules
+make[1]: Entering directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make[2]: Entering directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+  CC [M]  md2.o
+In file included from /usr/src/linux-headers-6.19.13+deb14-common/include/asm-generic/bug.h:31,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/bug.h:193,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/alternative.h:9,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/barrier.h:5,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/include/linux/list.h:11,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/include/linux/module.h:12,
+                 from md2.c:2:
+md2.c: In function ‘md_init’:
+md2.c:10:55: error: implicit declaration of function ‘md1_local’ [-Wimplicit-function-declaration]
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_local() );
+      |                                                       ^~~~~~~~~
+/usr/src/linux-headers-6.19.13+deb14-common/include/linux/printk.h:484:33: note: in definition of macro ‘printk_index_wrap’
+  484 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
+      |                                 ^~~~~~~~~~~
+md2.c:10:5: note: in expansion of macro ‘printk’
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_local() );
+      |     ^~~~~~
+md2.c:10:13: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘int’ [-Wformat=]
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_local() );
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~
+      |                                                       |
+      |                                                       int
+/usr/src/linux-headers-6.19.13+deb14-common/include/linux/printk.h:484:25: note: in definition of macro ‘printk_index_wrap’
+  484 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
+      |                         ^~~~
+md2.c:10:5: note: in expansion of macro ‘printk’
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_local() );
+      |     ^~~~~~
+md2.c:10:49: note: format string is defined here
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_local() );
+      |                                                ~^
+      |                                                 |
+      |                                                 char *
+      |                                                %d
+make[4]: *** [/usr/src/linux-headers-6.19.13+deb14-common/scripts/Makefile.build:294: md2.o] Error 1
+make[3]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:2089: .] Error 2
+make[2]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[2]: Leaving directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+make[1]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[1]: Leaving directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make: *** [Makefile:8: default] Error 2
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+make -C /lib/modules/6.19.13+deb14-amd64/build M=/home/dafuu/IU7_6sem_OS/lab_05_md123 modules
+make[1]: Entering directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make[2]: Entering directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+  CC [M]  md2.o
+In file included from /usr/src/linux-headers-6.19.13+deb14-common/include/asm-generic/bug.h:31,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/bug.h:193,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/alternative.h:9,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/arch/x86/include/asm/barrier.h:5,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/include/linux/list.h:11,
+                 from /usr/src/linux-headers-6.19.13+deb14-common/include/linux/module.h:12,
+                 from md2.c:2:
+md2.c: In function ‘md_init’:
+md2.c:10:55: error: implicit declaration of function ‘md1_noexport’ [-Wimplicit-function-declaration]
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_noexport() );
+      |                                                       ^~~~~~~~~~~~
+/usr/src/linux-headers-6.19.13+deb14-common/include/linux/printk.h:484:33: note: in definition of macro ‘printk_index_wrap’
+  484 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
+      |                                 ^~~~~~~~~~~
+md2.c:10:5: note: in expansion of macro ‘printk’
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_noexport() );
+      |     ^~~~~~
+md2.c:10:13: warning: format ‘%s’ expects argument of type ‘char *’, but argument 2 has type ‘int’ [-Wformat=]
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_noexport() );
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~
+      |                                                       |
+      |                                                       int
+/usr/src/linux-headers-6.19.13+deb14-common/include/linux/printk.h:484:25: note: in definition of macro ‘printk_index_wrap’
+  484 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
+      |                         ^~~~
+md2.c:10:5: note: in expansion of macro ‘printk’
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_noexport() );
+      |     ^~~~~~
+md2.c:10:49: note: format string is defined here
+   10 |     printk( "+ string returned md1_proc() is : %s\n", md1_noexport() );
+      |                                                ~^
+      |                                                 |
+      |                                                 char *
+      |                                                %d
+make[4]: *** [/usr/src/linux-headers-6.19.13+deb14-common/scripts/Makefile.build:294: md2.o] Error 1
+make[3]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:2089: .] Error 2
+make[2]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[2]: Leaving directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+make[1]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[1]: Leaving directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make: *** [Makefile:8: default] Error 2
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+make -C /lib/modules/6.19.13+deb14-amd64/build M=/home/dafuu/IU7_6sem_OS/lab_05_md123 modules
+make[1]: Entering directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make[2]: Entering directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+  CC [M]  md2.o
+In file included from md2.c:3:
+md.h:4:14: warning: ‘md1_local’ declared ‘static’ but never defined [-Wunused-function]
+    4 | static char* md1_local(void);
+      |              ^~~~~~~~~
+  MODPOST Module.symvers
+WARNING: modpost: missing MODULE_DESCRIPTION() in md1.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md2.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md3.o
+ERROR: modpost: "md1_noexport" [md2.ko] undefined!
+make[4]: *** [/usr/src/linux-headers-6.19.13+deb14-common/scripts/Makefile.modpost:147: Module.symvers] Error 1
+make[3]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:2039: modpost] Error 2
+make[2]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[2]: Leaving directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+make[1]: *** [/usr/src/linux-headers-6.19.13+deb14-common/Makefile:260: __sub-make] Error 2
+make[1]: Leaving directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make: *** [Makefile:8: default] Error 2
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+make -C /lib/modules/6.19.13+deb14-amd64/build M=/home/dafuu/IU7_6sem_OS/lab_05_md123 modules
+make[1]: Entering directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make[2]: Entering directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+  CC [M]  md2.o
+  MODPOST Module.symvers
+WARNING: modpost: missing MODULE_DESCRIPTION() in md1.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md2.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md3.o
+  LD [M]  md1.ko
+  BTF [M] md1.ko
+  LD [M]  md2.ko
+  BTF [M] md2.ko
+  LD [M]  md3.ko
+  BTF [M] md3.ko
+make[2]: Leaving directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+make[1]: Leaving directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo insmod md2.ko
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo insmod md3.ko
+insmod: ERROR: could not insert module md3.ko: Operation not permitted
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo dmesg | tail -15
+[ 4432.483680] + module md2 start!
+[ 4432.483686] + data string exported from md1 : Привет мир!
+[ 4432.483689] + string returned md1_proc() is : Привет мир!
+[ 4437.863090] + module md3 start!
+[ 4437.863099] + data string exported from md1 : Привет мир!
+[ 4437.863102] + string returned md1_proc() is : Привет мир!
+dafuu)~/IU7_6sem_OS/lab_05_md123-> lsmod | grep md | head -n 3
+md2                    12288  0
+md1                    12288  1 md2
+dafuu)~/IU7_6sem_OS/lab_05_md123-> make
+make -C /lib/modules/6.19.13+deb14-amd64/build M=/home/dafuu/IU7_6sem_OS/lab_05_md123 modules
+make[1]: Entering directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+make[2]: Entering directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+  CC [M]  md3.o
+  MODPOST Module.symvers
+WARNING: modpost: missing MODULE_DESCRIPTION() in md1.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md2.o
+WARNING: modpost: missing MODULE_DESCRIPTION() in md3.o
+  LD [M]  md3.ko
+  BTF [M] md3.ko
+make[2]: Leaving directory '/home/dafuu/IU7_6sem_OS/lab_05_md123'
+make[1]: Leaving directory '/usr/src/linux-headers-6.19.13+deb14-amd64'
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo insmod md3.ko
+dafuu)~/IU7_6sem_OS/lab_05_md123-> sudo dmesg | tail -15
+[ 3923.126776] + module md1 start!
+[ 3926.618324] + module md2 start!
+[ 3926.618330] + data string exported from md1 : Привет мир!
+[ 3926.618334] + string returned md1_proc() is : Привет мир!
+[ 4130.010587] + module md2 unloaded!
+[ 4432.483680] + module md2 start!
+[ 4432.483686] + data string exported from md1 : Привет мир!
+[ 4432.483689] + string returned md1_proc() is : Привет мир!
+[ 4437.863090] + module md3 start!
+[ 4437.863099] + data string exported from md1 : Привет мир!
+[ 4437.863102] + string returned md1_proc() is : Привет мир!
+[ 4446.386075] perf: interrupt took too long (2512 > 2500), lowering kernel.perf_event_max_sample_rate to 79500
+[ 4473.192594] + module md3 start!
+[ 4473.192604] + data string exported from md1 : Привет мир!
+[ 4473.192607] + string returned md1_proc() is : Привет мир!
+dafuu)~/IU7_6sem_OS/lab_05_md123-> lsmod | grep md | head -n 3
+md3                     8192  0
+md2                    12288  0
+md1                    12288  2 md2,md3

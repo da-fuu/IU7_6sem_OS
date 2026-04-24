@@ -9,3 +9,4 @@ chdir
 *.order
 *.symvers
 *.mod.c
+.tmp_*
