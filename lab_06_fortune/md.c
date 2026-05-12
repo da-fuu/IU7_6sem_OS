@@ -26,32 +26,34 @@ static int fortune_release(struct inode *inode, struct file *file) {
 }
 
 static ssize_t fortune_write(struct file *file, const char __user *buffer, size_t len, loff_t *offset) {
-  if (len > POT_SIZE - write_index)
+  if (len + 1 > POT_SIZE - write_index)
     return -ENOSPC;
   if (copy_from_user(&cookie_pot[write_index], buffer, len)) {
     return -EFAULT;
   }
-  write_index += len;
+  write_index += len + 1;
   cookie_pot[write_index - 1] = '\0';
-  printk(KERN_INFO "fortune: write: %s\n", &cookie_pot[write_index - len]);
+  *offset += len;
+  printk(KERN_INFO "fortune: write: %s", &cookie_pot[write_index - len - 1]);
   return len;
 }
 
 static ssize_t fortune_read(struct file *file, char __user *buffer, size_t len, loff_t *offset) {
-  char temp[256];
-  int temp_len;
+  int read_len;
 
-  if (*offset > 0)
+  if (*offset > 0 || write_index == 0)
     return 0;
   if (read_index >= write_index)
     read_index = 0;
-  temp_len = snprintf(temp, sizeof(temp), "%s\n", &cookie_pot[read_index]);
-  if (copy_to_user(buffer, temp, temp_len) > 0)
+  read_len = strlen(&cookie_pot[read_index]);
+  if (read_len > len)
+    read_len = len;
+  if (copy_to_user(buffer, &cookie_pot[read_index], read_len) > 0)
     return -EFAULT;
-  read_index += temp_len;
-  *offset += temp_len;
-  printk(KERN_INFO "fortune: read: %s", temp);
-  return temp_len;
+  read_index += read_len + 1;
+  *offset += read_len;
+  printk(KERN_INFO "fortune: read: %s", &cookie_pot[read_index - read_len - 1]);
+  return read_len;
 }
 
 static const struct proc_ops fortune_ops = {
