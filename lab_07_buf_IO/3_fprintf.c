@@ -5,7 +5,7 @@
 void print_stat(char *msg) {
     struct stat statbuf;
     stat("q.txt", &statbuf);
-    fprintf(stdout, "%s: inode = %ld, size = %ld bytes\n", msg, statbuf->st_ino, statbuf->st_size);
+    fprintf(stdout, "%s: inode = %ld, size = %ld bytes\n", msg, statbuf.st_ino, statbuf.st_size);
 }
 
 int main() {
