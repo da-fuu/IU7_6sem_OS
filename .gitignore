@@ -9,3 +9,10 @@ main
 *.symvers
 *.mod.c
 .tmp_*
+*.aux
+*.bbl
+*.log
+*.out
+*.toc
+*.blg
+out/

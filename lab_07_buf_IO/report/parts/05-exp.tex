@@ -1,0 +1,42 @@
+\section{Варианты вопросов и ответов на них}
+
+\begin{lstlisting}[caption={Вопрос и ответ №1}, label={lst:q1}]
+?- find_owner(toyota, black, Surname, City, Phone, _, _, _, _, _).
+Surname = ivanov,
+City = moscow,
+Phone = '111-11-11' ;
+Surname = ivanov,
+City = moscow,
+Phone = '222-22-22' ;
+Surname = ivanov,
+City = minsk,
+Phone = '333-33-33' ;
+Surname = sidorov,
+City = yaroslavl,
+Phone = '555-55-55'.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Вопрос и ответ №2}, label={lst:q2}]
+?- find_owner(lada, white, Surname, City, Phone, _, _, _, _, _).
+Surname = ivanov,
+City = moscow,
+Phone = '111-11-11' ;
+Surname = ivanov,
+City = moscow,
+Phone = '222-22-22' ;
+Surname = ivanov,
+City = minsk,
+Phone = '333-33-33'.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Вопрос и ответ №3}, label={lst:q3}]
+?- find_owner(bmw, red, Surname, City, Phone, _, _, _, _, _).
+Surname = petrov,
+City = moscow,
+Phone = '444-44-44'.
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Вопрос и ответ №4}, label={lst:q4}]
+?- find_owner(bmw, green, Surname, City, Phone, _, _, _, _, _).
+false.
+\end{lstlisting}
