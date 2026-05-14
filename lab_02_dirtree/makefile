@@ -1,7 +1,7 @@
-all : main chdir
+all : main old
 
 % : %.c
 	gcc $< -g -o $@
 
 clean :
-	rm main chdir
+	rm main old
