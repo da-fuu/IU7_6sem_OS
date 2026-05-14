@@ -1,15 +1,6 @@
 server
 client
 main
-chdir
-1
-2_1
-2_2
-3
-1_thread
-2_1_thread
-2_2_thread
-3_thread
 *.cmd
 *.o
 *.ko
