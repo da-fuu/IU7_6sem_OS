@@ -6,8 +6,6 @@ all: $(MAIN).pdf
 
 $(MAIN).pdf: $(MAIN).tex $(PARTS)/*.tex auto/*.tex
 	pdflatex $<
-	-bibtex $(MAIN).aux
-	pdflatex $<
 	pdflatex $<
 
 	mkdir -p out && \
