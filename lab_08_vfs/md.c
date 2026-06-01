@@ -15,7 +15,10 @@ MODULE_DESCRIPTION("A simple VFS kernel module");
 #define MYVFS_MAGIC_NUMBER 0x61946878
 #define SLAB_NAME "MyVFSCache"
 
-static void **cache_mem_area = NULL;
+#define STRUCT_SIZE 32
+#define ELEM_NUM 128
+
+static void **struct_arr = NULL;
 struct kmem_cache * cache = NULL;
 
 static struct my_vfs_inode {
@@ -104,45 +107,59 @@ static struct file_system_type my_vfs_type = {
     .kill_sb = my_kill_litter_super
 };
 
-static void func_init(void *p) {
-    *(unsigned long *)p = (unsigned long)p;
+static void my_vfs_free_memory(void)
+{
+    int i;
+    if (struct_arr) {
+        for (i = 0; i < ELEM_NUM; i++) {
+            if (struct_arr[i])
+                kmem_cache_free(cache, struct_arr[i]);
+        }
+        kfree(struct_arr);
+    }
+    kmem_cache_destroy(cache);
+    printk(KERN_INFO "MyVFS: slab destroyed\n");
 }
 
 static int __init my_vfs_init(void) {
-    int ret = register_filesystem(&my_vfs_type);
+    int i, ret;
+    ret = register_filesystem(&my_vfs_type);
     if (ret != 0) {
         printk(KERN_ERR "MyVFS: register_filesystem error\n");
         return ret;
     }
-    cache_mem_area = (void **)kmalloc(sizeof(void *), GFP_KERNEL);
-    if (!cache_mem_area) {
-        printk(KERN_ERR "MyVFS: cache_mem_area error\n");
-        unregister_filesystem(&my_vfs_type);
-        return -ENOMEM;
-    }
-    cache = kmem_cache_create(SLAB_NAME, sizeof(void *), 0, SLAB_HWCACHE_ALIGN, func_init);
+
+    cache = kmem_cache_create(SLAB_NAME, STRUCT_SIZE, 0, SLAB_HWCACHE_ALIGN | SLAB_NO_MERGE, NULL);
     if (!cache) {
         printk(KERN_ERR "MyVFS: kmem_cache_create error\n");
-        kfree(cache_mem_area);
         unregister_filesystem(&my_vfs_type);
         return -ENOMEM;
     }
-    *cache_mem_area = kmem_cache_alloc(cache, GFP_KERNEL);
-    if (!*cache_mem_area) {
-        printk(KERN_ERR "MyVFS: kmem_cache_alloc error\n");
-        kmem_cache_destroy(cache);
-        kfree(cache_mem_area);
+
+    struct_arr = kcalloc(ELEM_NUM, sizeof(void *), GFP_KERNEL);
+    if (!struct_arr) {
+        printk(KERN_ERR "MyVFS: kcalloc error\n");
+        my_vfs_free_memory();
         unregister_filesystem(&my_vfs_type);
         return -ENOMEM;
     }
+
+    for (i = 0; i < ELEM_NUM; i++) {
+        struct_arr[i] = kmem_cache_alloc(cache, GFP_KERNEL);
+        if (!struct_arr[i]) {
+            printk(KERN_ERR "MyVFS: kmem_cache_alloc error for entry %d\n", i);
+            my_vfs_free_memory();
+            unregister_filesystem(&my_vfs_type);
+            return -ENOMEM;
+        }
+    }
+
     printk(KERN_INFO "MyVFS: loaded\n");
     return 0;
 }
 
 static void __exit my_vfs_exit(void) {
-    kmem_cache_free(cache, *cache_mem_area);
-    kmem_cache_destroy(cache);
-    kfree(cache_mem_area);
+    my_vfs_free_memory();
     if (unregister_filesystem(&my_vfs_type) != 0) {
         printk(KERN_ERR "MyVFS: unregister_filesystem error\n");
     }
