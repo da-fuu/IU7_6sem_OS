@@ -10,14 +10,14 @@
 #include <linux/slab.h>
 
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("A simple VFS kernel module");
+MODULE_DESCRIPTION("Simple VFS kernel module");
 MODULE_AUTHOR("Zharinov");
 
 #define MYVFS_MAGIC_NUMBER 0x61946878
 #define SLAB_NAME "myfsCache"
 
 #define STRUCT_SIZE 32
-#define ELEM_NUM 128
+#define ELEM_NUM 127
 
 static void **struct_arr = NULL;
 struct kmem_cache *cache = NULL;
@@ -28,7 +28,7 @@ static struct my_vfs_inode {
 } my_vfs_inode;
 
 static void my_vfs_put_super(struct super_block *sb) {
-    printk(KERN_INFO "myfs: super block destroyed\n");
+    printk(KERN_INFO "myfs: unmount - super block destroyed\n");
 }
 
 static struct super_operations const my_vfs_sup_ops = {
@@ -57,7 +57,6 @@ static int my_vfs_fill_sb(struct super_block *sb, struct fs_context *fc) {
     inode_set_ctime_to_ts(root_inode, ts);
     root_inode->i_private = &my_vfs_inode;
     root_inode->i_ino = 1;
-    printk(KERN_INFO "myfs: struct inode created\n");
     root_inode->i_op = &simple_dir_inode_operations;
     root_inode->i_fop = &simple_dir_operations;
     sb->s_root = d_make_root(root_inode);
@@ -66,13 +65,12 @@ static int my_vfs_fill_sb(struct super_block *sb, struct fs_context *fc) {
         iput(root_inode);
         return -ENOMEM;
     }
-    printk(KERN_INFO "myfs: VFS make root\n");
-    printk(KERN_INFO "myfs: super_block init\n");
+    printk(KERN_INFO "myfs: root inode created\n");
     return 0;
 }
 
 static int my_vfs_get_tree(struct fs_context *fc) {
-    printk(KERN_INFO "myfs: get tree\n");
+    printk(KERN_INFO "myfs: mount - get tree\n");
     return get_tree_nodev(fc, my_vfs_fill_sb);
 }
 
@@ -125,7 +123,6 @@ static int __init my_vfs_init(void) {
         unregister_filesystem(&my_vfs_type);
         return -ENOMEM;
     }
-
     struct_arr = kcalloc(ELEM_NUM, sizeof(void *), GFP_KERNEL);
     if (!struct_arr) {
         printk(KERN_ERR "myfs: kcalloc error\n");
@@ -133,7 +130,6 @@ static int __init my_vfs_init(void) {
         unregister_filesystem(&my_vfs_type);
         return -ENOMEM;
     }
-
     for (i = 0; i < ELEM_NUM; i++) {
         struct_arr[i] = kmem_cache_alloc(cache, GFP_KERNEL);
         if (!struct_arr[i]) {
@@ -143,7 +139,6 @@ static int __init my_vfs_init(void) {
             return -ENOMEM;
         }
     }
-
     printk(KERN_INFO "myfs: loaded\n");
     return 0;
 }
