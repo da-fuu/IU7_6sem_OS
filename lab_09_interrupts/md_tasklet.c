@@ -8,7 +8,7 @@ MODULE_AUTHOR("Zharinov");
 
 #define IRQ_NUM 1
 
-char* ascii[84] = { " ", "Esc", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+static char *ascii[84] = { " ", "Esc", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
                     "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "Enter", "Ctrl",
                     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "`", "Shift (left)", "\\",
                     "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift (right)",
@@ -20,19 +20,16 @@ char* ascii[84] = { " ", "Esc", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 static struct tasklet_struct *tasklet = NULL;
 static ktime_t irq_start_time;
 
-void my_tasklet_fun(unsigned long data) {
+static void my_tasklet_fun(unsigned long data) {
     char last_key_name[20];
-    int last_key_code = -1;
     ktime_t end_time, diff;
     int code = inb(0x60);
-    int is_release = (code & 0x80) ? 1 : 0;
     int press_code = code & 0x7F;
-    if (is_release && press_code < 84) {
-        last_key_code = code;
+    if ((code & 0x80) && press_code < 84) {
         strncpy(last_key_name, ascii[press_code], sizeof(last_key_name));
         end_time = ktime_get();
         diff = ktime_sub(end_time, irq_start_time);
-        printk(KERN_INFO "mytasklet: Key: %s Code: %d Execution time: %lld\n", last_key_name, last_key_code, ktime_to_ns(diff));
+        printk(KERN_INFO "mytasklet: Key: %s Code: %d Execution time: %lld\n", last_key_name, code, ktime_to_ns(diff));
     }
 }
 
