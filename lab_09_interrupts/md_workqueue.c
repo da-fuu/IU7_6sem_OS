@@ -1,7 +1,10 @@
 #include <linux/module.h>
+#include <linux/kernel.h>
+#include <linux/slab.h>
+#include <linux/ktime.h>
 #include <linux/interrupt.h>
-#include <linux/delay.h>
 #include <asm/io.h>
+#include <linux/delay.h>
 
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Workqueue kernel module");
